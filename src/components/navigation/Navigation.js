@@ -69,7 +69,11 @@ const Navigation = ({ dynamic }) => {
               Avetti React Training - RRD{" "}
             </Link>
           </Typography>
-
+          <Button color="inherit">
+            <Link style={{ color: "white" }} to={"/counter"}>
+              Counter
+            </Link>
+          </Button>
           {menuState.map((menu, index) => (
             <Button key={index} color="inherit">
               <Link style={{ color: "white" }} to={menu.url}>

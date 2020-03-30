@@ -6,6 +6,7 @@ import history from "./history";
 import Home from "./components/pages/Home";
 import Navigation from "./components/navigation/Navigation";
 import PageWrapper from "./components/pages/PageWrapper";
+import Counter from "./apps/Counter/Counter";
 
 function App() {
   const [dynamicRoute, setDynamicRoute] = useState([]);
@@ -20,6 +21,8 @@ function App() {
         <Navigation dynamic={handleDynamicData} />
         <Switch>
           <Route exact path="/" component={Home} />
+          <Route exact path="/counter" component={Counter} />
+
           {/*Static Routing*/}
           {/* <Route exact path="/page-one" component={PageOne} />
           <Route exact path="/page-two" component={PageTwo} />
