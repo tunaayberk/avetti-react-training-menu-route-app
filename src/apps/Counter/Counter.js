@@ -7,7 +7,8 @@ import Button from "@material-ui/core/Button";
 import {
   addResult,
   decResult,
-  customChange
+  customChange,
+  thunkCustomChange
 } from "../../redux/actions/demoActions";
 
 const Counter = () => {
@@ -20,7 +21,7 @@ const Counter = () => {
   );
 
   const handleSubmit = () => {
-    dispatch(customChange(customState));
+    dispatch(thunkCustomChange(customState));
   };
 
   return (

@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { Route, Switch, Router, Redirect } from "react-router-dom";
+import { useDispatch } from "react-redux";
 
 import history from "./history";
 
@@ -7,8 +8,12 @@ import Home from "./components/pages/Home";
 import Navigation from "./components/navigation/Navigation";
 import PageWrapper from "./components/pages/PageWrapper";
 import Counter from "./apps/Counter/Counter";
+import CategoryPage from "./components/categorypage/CategoryPage";
+import { categoryRequest } from "./redux/actions/categoryActions";
 
 function App() {
+  const dispatch = useDispatch();
+
   const [dynamicRoute, setDynamicRoute] = useState([]);
 
   const handleDynamicData = data => {
@@ -30,20 +35,13 @@ function App() {
           {/*Dynamic Routing */}
           <Route exact path="/page/:pageId" component={PageWrapper} />
           {dynamicRoute.map((menu, index) => {
+            dispatch(categoryRequest(menu.cid));
             return (
               <Route
                 key={index}
                 exact
                 path={menu.url}
-                render={routeProps => (
-                  <div>
-                    <h1>{menu.name}</h1>
-                    <img
-                      src={`https://demob2b2c.avetti.io/preview/store${menu.image}`}
-                      alt={menu.url.replace("/", "")}
-                    />
-                  </div>
-                )}
+                render={routeProps => <CategoryPage menu={menu} />}
               />
             );
           })}

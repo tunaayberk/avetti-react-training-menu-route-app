@@ -12,3 +12,11 @@ export const customChange = data => ({
   type: CUSTOM_CHANGE,
   payload: data
 });
+
+export const thunkCustomChange = data => {
+  return dispatch => {
+    let tempNumber = data * 3;
+
+    dispatch(customChange(tempNumber));
+  };
+};

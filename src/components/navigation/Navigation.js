@@ -41,7 +41,8 @@ const Navigation = ({ dynamic }) => {
           let name = child.name.replace("&amp;", "&");
           let url = child.URL.replace("shop", "");
           let image = child.image;
-          return { url, name, image };
+          let cid = child.cid;
+          return { url, name, image, cid };
         });
         return tempArr;
       })
