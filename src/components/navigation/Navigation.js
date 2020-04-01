@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
+import { useDispatch } from "react-redux";
 
 import { makeStyles } from "@material-ui/core/styles";
 import AppBar from "@material-ui/core/AppBar";
@@ -8,6 +9,7 @@ import Typography from "@material-ui/core/Typography";
 import Button from "@material-ui/core/Button";
 import IconButton from "@material-ui/core/IconButton";
 import MenuIcon from "@material-ui/icons/Menu";
+import { menuPopulate } from "../../redux/actions/menuActions";
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -24,6 +26,8 @@ const useStyles = makeStyles(theme => ({
 }));
 
 const Navigation = ({ dynamic }) => {
+  const dispatch = useDispatch();
+
   const classes = useStyles();
   const [menuState, setMenuState] = useState([
     { url: "/page/1", name: "Page 1" },
@@ -47,6 +51,7 @@ const Navigation = ({ dynamic }) => {
         return tempArr;
       })
       .then(result => {
+        dispatch(menuPopulate(result));
         dynamic(result);
         setMenuState(result);
       });
@@ -77,7 +82,7 @@ const Navigation = ({ dynamic }) => {
           </Button>
           {menuState.map((menu, index) => (
             <Button key={index} color="inherit">
-              <Link style={{ color: "white" }} to={menu.url}>
+              <Link style={{ color: "white" }} to={`/shop${menu.url}`}>
                 {menu.name}
               </Link>
             </Button>

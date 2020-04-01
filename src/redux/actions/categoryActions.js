@@ -1,3 +1,5 @@
+import { call, put } from "redux-saga/effects";
+
 import {
   CATEGORY_API_REQUEST,
   CATEGORY_API_SUCCESS,
@@ -14,6 +16,11 @@ export const categoryError = data => ({
   payload: data
 });
 
+export const categoryFetchRequest = cid => ({
+  type: CATEGORY_API_REQUEST,
+  payload: cid
+});
+
 export const categoryRequest = cid => {
   return dispatch => {
     if (cid) {
@@ -25,4 +32,30 @@ export const categoryRequest = cid => {
         .catch(err => dispatch(categoryError(err)));
     }
   };
+};
+
+export function* newCategoryRequest({ payload }) {
+  try {
+    const categoryState = yield call(fetchFunction, payload);
+
+    yield put(categorySuccess(payload, categoryState));
+  } catch (e) {
+    categoryError(e);
+  }
+}
+
+const fetchFunction = async cid => {
+  let tempResult = "";
+  await fetch(
+    `https://demob2b2cpreview.avetti.io/preview/uservices/1.0.2/category-page/20180521148/cid/${cid}/lang/en/`
+  )
+    .then(res => res.json())
+    .then(json => {
+      tempResult = json[1].items;
+    })
+    .catch(err => {
+      return err;
+    });
+
+  return tempResult;
 };

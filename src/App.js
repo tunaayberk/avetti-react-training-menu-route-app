@@ -10,6 +10,8 @@ import PageWrapper from "./components/pages/PageWrapper";
 import Counter from "./apps/Counter/Counter";
 import CategoryPage from "./components/categorypage/CategoryPage";
 import { categoryRequest } from "./redux/actions/categoryActions";
+import NewCategoryPage from "./components/newCategoryPage/NewCategoryPage";
+import SagaCategoryPage from "./components/newCategoryPage/SagaCategoryPage";
 
 function App() {
   const dispatch = useDispatch();
@@ -34,7 +36,9 @@ function App() {
   <Route exact path="/page-three" component={PageThree} /> */}
           {/*Dynamic Routing */}
           <Route exact path="/page/:pageId" component={PageWrapper} />
-          {dynamicRoute.map((menu, index) => {
+          <Route exact path="/shop/:shopId" component={NewCategoryPage} />
+          <Route exact path="/saga/:shopId" component={SagaCategoryPage} />
+          {/* dynamicRoute.map((menu, index) => {
             dispatch(categoryRequest(menu.cid));
             return (
               <Route
@@ -44,7 +48,7 @@ function App() {
                 render={routeProps => <CategoryPage menu={menu} />}
               />
             );
-          })}
+          }) */}
         </Switch>
       </div>
     </Router>
