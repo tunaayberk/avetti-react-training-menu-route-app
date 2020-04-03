@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useContext } from "react";
 
 import { makeStyles } from "@material-ui/core/styles";
 import clsx from "clsx";
@@ -16,6 +16,8 @@ import FavoriteIcon from "@material-ui/icons/Favorite";
 import ShareIcon from "@material-ui/icons/Share";
 import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
 import MoreVertIcon from "@material-ui/icons/MoreVert";
+import { FormattedNumber } from "react-intl";
+import { I18nContext } from "../../../i18n/index";
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -41,6 +43,8 @@ const useStyles = makeStyles(theme => ({
 }));
 
 const ItemCard = ({ image, price, title }) => {
+  const { convertionRate, currency } = useContext(I18nContext);
+
   const classes = useStyles();
 
   return (
@@ -51,7 +55,9 @@ const ItemCard = ({ image, price, title }) => {
           {title}{" "}
         </Typography>
         <Typography variant="h5" color="textSecondary" component="p">
-          {/* price.value.integer */}$
+          {Number(price.value.integer + "." + price.value.decimal) *
+            convertionRate}
+          {currency}
         </Typography>
       </CardContent>
       <CardActions disableSpacing>

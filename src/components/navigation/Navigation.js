@@ -10,6 +10,7 @@ import Button from "@material-ui/core/Button";
 import IconButton from "@material-ui/core/IconButton";
 import MenuIcon from "@material-ui/icons/Menu";
 import { menuPopulate } from "../../redux/actions/menuActions";
+import LanguageChanger from "../../i18n/components/LanguageChanger";
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -75,6 +76,7 @@ const Navigation = ({ dynamic }) => {
               Avetti React Training - RRD{" "}
             </Link>
           </Typography>
+          <LanguageChanger />
           <Button color="inherit">
             <Link style={{ color: "white" }} to={"/counter"}>
               Counter
