@@ -20,21 +20,24 @@ const NewCategoryPage = ({ menu }) => {
   const [loadingState, setLoadingState] = useState(true);
 
   const categoryItems = useSelector(
-    state => state.categoryReducer.categoryItems,
+    (state) => state.categoryReducer.categoryItems,
     shallowEqual
   );
 
-  const menuState = useSelector(state => state.menuReducer.menu, shallowEqual);
+  const menuState = useSelector(
+    (state) => state.menuReducer.menu,
+    shallowEqual
+  );
 
   const categoryState = useSelector(
-    state => state.categoryReducer.categoryItems,
+    (state) => state.categoryReducer.categoryItems,
     shallowEqual
   );
 
   useEffect(() => {
     if (menuState.length > 0) {
-      if (menuState.some(menu => menu.url === `/${shopId}`)) {
-        const temp = menuState.filter(menu => menu.url === `/${shopId}`)[0];
+      if (menuState.some((menu) => menu.url === `/${shopId}`)) {
+        const temp = menuState.filter((menu) => menu.url === `/${shopId}`)[0];
         setNameState(temp.name);
         setImageState(temp.image);
         setCidState(temp.cid);
@@ -70,7 +73,7 @@ const NewCategoryPage = ({ menu }) => {
         className="category-header"
         style={{
           background: `url(https://demob2b2c.avetti.io/preview/store${imageState}) no-repeat center center`,
-          backgroundSize: "cover"
+          backgroundSize: "cover",
         }}
       >
         {nameState}
@@ -79,7 +82,7 @@ const NewCategoryPage = ({ menu }) => {
         {!loadingState ? (
           items.map((item, index) => {
             return (
-              <Grid item xs={3}>
+              <Grid item xs={6} sm={3}>
                 <ItemCard key={index} {...item} />
               </Grid>
             );
@@ -90,7 +93,7 @@ const NewCategoryPage = ({ menu }) => {
               width: "100%",
               dispay: "flex",
               justifyContent: "center",
-              alignContent: "center"
+              alignContent: "center",
             }}
           >
             <CircularProgress />
