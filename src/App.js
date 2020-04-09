@@ -6,6 +6,8 @@ import history from "./history";
 
 import Home from "./components/pages/Home";
 import Navigation from "./components/navigation/Navigation";
+import PreFetchNavigation from "./components/navigation/PreFetchNavigation";
+
 import PageWrapper from "./components/pages/PageWrapper";
 import Counter from "./apps/Counter/Counter";
 import CategoryPage from "./components/categorypage/CategoryPage";
@@ -18,14 +20,14 @@ function App() {
 
   const [dynamicRoute, setDynamicRoute] = useState([]);
 
-  const handleDynamicData = data => {
+  const handleDynamicData = (data) => {
     setDynamicRoute(data);
   };
 
   return (
     <Router history={history}>
       <div className="App">
-        <Navigation dynamic={handleDynamicData} />
+        <PreFetchNavigation dynamic={handleDynamicData} />
         <Switch>
           <Route exact path="/" component={Home} />
           <Route exact path="/counter" component={Counter} />
